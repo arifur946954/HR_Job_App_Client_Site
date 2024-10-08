@@ -1,0 +1,164 @@
+<div style="height: 100%;">
+    <mat-sidenav-container class="h-100 overlay"
+        style="background: url(./assets/img/citygroup/Background_N0_CityGroup.png); background-repeat: no-repeat; background-size: 100% 100%;">
+ 
+
+
+         <!-- <div class="form-group clearfix">
+            <label class="control-label col-sm-2 ml-4 p-0 m-0 pt-1" for="userID" style="float: left;">
+              Client:
+            </label>
+            <div class="col-sm-9 p-0 m-0" style="float: left;">
+              <div style="padding: 0px; width: 100%; font-size: 13px; float: left;">
+                <ng-select2
+                  [options]="options"
+                  [allowClear]="true"
+                  [data]="quotationList"
+                  [placeholder]="'Select Client'"
+                  id="testId"
+                
+                 
+                   (valueChanged)="testId=$event;   onScrolls(testId) "
+                 
+                 
+                 >
+                </ng-select2>
+              </div>
+            </div>
+          </div>  -->
+
+        
+
+
+  
+
+
+<!-- app.component.html -->
+<!-- app.component.html -->
+
+
+          
+
+
+        
+ 
+           <!-- <select class="form-control" (mouseenter)="onScroll($event)" >
+            <option *ngFor="let quotation of quotationList" [value]="quotation.text"  (mouseenter)="onScroll($event)" >
+              {{ quotation.text }}
+            </option>
+          </select>   -->
+          
+
+        <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 25vh; margin-bottom: 25vh;">
+
+            <!-- <div class="col-md-3 mat-elevation-z6"
+                style="text-align: center;margin-left:25%;margin-right:25%; padding-top: 10px; padding-left: 2%; padding-right: 2%; border-radius: 25px; background-image: linear-gradient( 89.4deg,  rgba(190,0,39,1) 0.8%, rgba(10,35,104,1) 99.4% );"> -->
+            <div class="col-md-3 mat-elevation-z6"
+                style="text-align: center;margin-left:25%;margin-right:25%; padding-top: 10px; padding-left: 2%; padding-right: 2%; border-radius: 25px; background-image: radial-gradient( circle farthest-corner at 50.4% 50.5%,  rgba(251,32,86,1) 0%, rgba(135,2,35,1) 90% );">
+
+                <div class="col-md-12" style="display: inline-block; padding: 0px; margin: 0px;">
+                    <div class="">
+                        <div class="" style="color: #ffffff; font-weight: bold; text-align: center; font-size: 25px;">
+                            <i class="fa fa-align-justify"></i>
+                            City Group
+                        </div>
+                        <div class="card-body" style="margin: 0px; padding: 0px;">
+
+                            <div class="col-md-12" style="padding: 0px; margin: 0px;">
+
+                                <div class="container-fluid" style="padding: 10px;">
+
+
+                                    <form #userForm="ngForm" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+
+
+                                        <div class="form-group">
+                                            <div class="input-group input-group-sm mb-3"
+                                                style="width: 75%; margin-left: 12.5%;">
+
+                                                <input id="userid" type="text" aria-label="Small"
+                                                    aria-describedby="inputGroup-sizing-sm" autofocus
+                                                    [(ngModel)]="userModel.user_id" #userid required
+                                                    class="form-control " placeholder="Employee ID...(e.g. 06739)"
+                                                    name="userid" formControlName="userid">
+
+                                                <small style="width: 100%; color: #ffffff !important;"
+                                                    class="text-danger"
+                                                    *ngIf="form.controls['userid'].touched && form.controls['userid'].errors?.required">
+                                                    Employee ID is required</small>
+
+                                                <small style="width: 100%; color: #ffffff !important;"
+                                                    class="text-danger"
+                                                    *ngIf="form.controls['userid'].hasError('minlength')">
+                                                    Employee ID must be 5 digits</small>
+
+                                            </div>
+
+                                        </div>
+                                        
+
+                                        <div class="form-group">
+                                            <div class="input-group input-group-sm mb-3"
+                                                style="width: 75%; margin-left: 12.5%;">
+
+                                                <input id="password" type="password" class="form-control"
+                                                    aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                                                    [(ngModel)]="userModel.user_password" #password required
+                                                    name="password" placeholder="Password" formControlName="password">
+
+                                                <small style="width: 100%; color: #ffffff !important;"
+                                                    class="text-danger"
+                                                    *ngIf="form.controls['password'].touched && form.controls['password'].errors?.required">
+                                                    Password is required</small>
+
+                                                <small style="width: 100%; color: #ffffff !important;"
+                                                    class="text-danger"
+                                                    *ngIf="form.controls['password'].hasError('minlength')">
+                                                    Password must be at least 4 digits</small>
+
+                                            </div>
+
+                                            
+
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group input-group-sm"
+                                                style="width: 75%; margin-left: 12.5%;">
+                                                <button class="btn mat-elevation-z6 w-100"
+                                                    [disabled]="userForm.form.invalid"
+                                                    style="background-image: linear-gradient( 179.7deg,  rgba(197,214,227,1) 2.9%, rgba(144,175,202,1) 97.1% ); color:darkblue; font-weight:bold;"
+                                                    type="submit">Login</button>
+                                                    <div class="text-white">Not Register Yet <a class="text-primary" class="regitext" id="Register" routerLink="/register">Register</a></div>
+                                                    <br>   
+                                            </div>
+                                            <div class="text-white"> <a class="text-primary" class="regitext" id="Register" routerLink="/requirement">Requirement Form</a></div>
+                                        </div>
+
+
+
+
+
+
+
+
+                        </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-sidenav-container>
+
+  
+
+
+    <!-- <mat-toolbar color="primary" class="footer full-width"
+        style="background: url(./assets/img/citygroup/Footer_N0_CityGroup.png); background-repeat: no-repeat; background-size: 100% 100%;"> -->
+    <!-- <p style="font-size: 12px; text-align: right; font-size: 20px; font-weight: bold; background: #e5345e75;">
+            Powered by City Group @IT all rights reserved</p> -->
+    <!-- </mat-toolbar> -->
+</div>
