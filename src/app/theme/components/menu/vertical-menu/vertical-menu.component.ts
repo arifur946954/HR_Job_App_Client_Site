@@ -75,7 +75,7 @@ export class VerticalMenuComponent implements OnInit {
 
 
   //Get Side Menu
-  public _getSideMenuUrl: string = 'menuss/getmenu';//menu.getmenu
+  public _getSideMenuUrl: string = 'jobmenu/getmenu';//menu.getmenu
   getMenues(userId) {
     var param = { UserId: userId, id: this.cmnEntity.roleId };
     var apiUrl = this._getSideMenuUrl;

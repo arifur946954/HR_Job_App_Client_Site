@@ -44,7 +44,7 @@ export class SidenavComponent implements OnInit {
     this.loadEmployeeDetails();
   }
 
-  public _getUrl: string = 'users/loggeduserdetails';
+  public _getUrl: string = 'jobusers/loggeduserdetails';
   loadEmployeeDetails() {
     var param = { UserId: this.cmnEntity.userId, IsTrue: this.loggedUser.isSys };
     var apiUrl = this._getUrl;

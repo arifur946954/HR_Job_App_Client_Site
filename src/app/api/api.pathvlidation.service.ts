@@ -24,6 +24,7 @@ export class pathValidation {
     constructor(private router: Router, private _dataservice: DataService) { }
 
     validate(location) {
+        debugger
         //var pathname = location.pathname == '/' ? location.hash : location.pathname;
         var pathname = location.hash;
         if (pathname.includes('#')) {
@@ -130,11 +131,14 @@ export class pathValidation {
         var btnRow=[];
         this.userDefinedButton.forEach(item => {
             btnRow.push(
-                { btnId: item.btnId, btnName: item.btnName, rbtnName: item.rbtnName, bClass: item.bClass, rbClass: item.rbClass, iClass: item.iClass, riClass: item.riClass, btnFunc: item.btnFunc, btnForm: item.btnForm, isReverse: item.isReverse, isShowBtn: item.isShowBtn, message: item.message, isDual: item.isDual, isValid: item.isValid }
+                { btnId: item.btnId, btnName: item.btnName, rbtnName: item.rbtnName, bClass: item.bClass, rbClass: item.rbClass, iClass: item.iClass, 
+                    riClass: item.riClass, btnFunc: item.btnFunc, btnForm: item.btnForm, isReverse: item.isReverse, isShowBtn: item.isShowBtn,
+                     message: item.message, isDual: item.isDual, isValid: item.isValid }
             );
         });
 
         this.rowEntity.cmnBtn = btnRow;
+        console.log("this.rowEntity",this.rowEntity)
         return this.rowEntity;
 
     }

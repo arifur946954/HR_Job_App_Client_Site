@@ -43,7 +43,7 @@ export class UserMenuComponent implements OnInit {
     this.router.navigate(['/login']);    
   }
 
-  public _getUrl: string = 'users/loggeduserdetails';
+  public _getUrl: string = 'jobusers/loggeduserdetails';
   loadEmployeeDetails() {  
     var param = { UserId: this.cmnEntity.userId, IsTrue:this.loggedUser.isSys};
     var apiUrl=this._getUrl;
@@ -51,6 +51,7 @@ export class UserMenuComponent implements OnInit {
         .then(response =>{
               debugger;
                 this.res = response;
+                console.log("User Response",this.res)
                 if(this.res.resdata.data.length>0 && this.res.resdata.resstate){
                   var datas = JSON.parse(this.res.resdata.data);
                   this.my_employee =  datas as Employee;

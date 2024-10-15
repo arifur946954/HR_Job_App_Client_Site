@@ -91,7 +91,8 @@ export class LoginComponent  {
           sessionStorage.setItem('userID', this.userID);
           sessionStorage.setItem('password', this.userPassword);
           this.toastr.success(resMessage, 'Success!'); 
-          this.router.navigate(['/home']);          
+          //this.router.navigate(['/requirement']);    
+          this.router.navigate(['/home']);      
         } else {
           this.toastr.error(resMessage, 'OPPS!'); 
         }

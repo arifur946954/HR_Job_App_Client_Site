@@ -1,4 +1,4 @@
-<div class="col-12 p-0 m-0">
+ <div class="col-12 p-0 m-0">
     <div class="d-flex justify-content-center p-0 m-0">
         <div class="col-11 pl-0 pr-0 pb-0 pt-1 m-0" style="background-color: #fff;">
 
@@ -13,7 +13,7 @@
                         [btnForm]="userForm"></common-button-top>
                 </div>
 
-                <!-- Entry Form -->
+              
                 <div *ngIf="!cmnEntity.isShow" class="col-md-12 pl-0 pr-0 pt-2 pb-0 m-0 table-primary">
                     <div class="container">
                         <form id="subForm" [formGroup]="userForm" #f="ngForm" class="form-horizontal">
@@ -56,9 +56,7 @@
                                                 <th
                                                     style="position:sticky; top:-1.5px; z-index:1; cursor: pointer; text-align: center;">
                                                     Department</th>
-                                                <!-- <th
-                                                    style="position:sticky; top:-1.5px; z-index:1; cursor: pointer; text-align: center;">
-                                                    Action</th> -->
+                                             
                                             </tr>
                                         </thead>
                                         <tbody class="banglaTitle p-0" style="padding-bottom: 0px; margin-bottom: 0px;">
@@ -71,10 +69,7 @@
                                                     {{item.empDesig}}</td>
                                                 <td class="pl-2 pr-1 pt-1 pb-1" style="text-align: center">
                                                     {{item.empDept}}</td>
-                                                <!-- <td class="pl-2 pr-1 pt-1 pb-1" style="text-align: center;" width="10%">
-                                                    <button type="button" class="btn btn-success btn-sm">Create
-                                                        User</button>
-                                                </td> -->
+                                           
 
                                             </tr>
                                         </tbody>
@@ -86,7 +81,7 @@
                     </div>
                 </div>
 
-                <!-- List-->
+           
                 <div *ngIf="cmnEntity.isShow" class="card-body pl-0 pr-4 pt-2"
                     style="min-height: 460px; margin-bottom: -20px;">
                     <div class="row">
@@ -210,3 +205,4 @@
         </div>
     </div>
 </div>
+

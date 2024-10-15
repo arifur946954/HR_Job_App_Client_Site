@@ -23,13 +23,13 @@ import { UserSetupComponent } from './project_component/security/userSetup/userS
 
  
 export const routes: Routes = [
-    { path: 'updatePassword', component: UpdatePasswordComponent },
-    { path: 'home', component: HomeComponent  },
-    { path: 'dashboard', component: DashboardComponent},
-    { path: 'security/role', component: RoleComponent },
-    { path: 'security/menu', component: MenuComponent},
-    { path: 'security/userSetup', component: UserSetupComponent},
-    { path: 'security/userRoleAssign', component: UserRoleComponent},
+    // { path: 'updatePassword', component: UpdatePasswordComponent },
+    // { path: 'home', component: HomeComponent  },
+    // { path: 'dashboard', component: DashboardComponent},
+    // { path: 'security/role', component: RoleComponent },
+    // { path: 'security/menu', component: MenuComponent},
+    // { path: 'security/userSetup', component: UserSetupComponent},
+    // { path: 'security/userRoleAssign', component: UserRoleComponent},
 
     { 
         path: '',  
@@ -40,14 +40,14 @@ export const routes: Routes = [
     
             
 
-            // { path: 'icons', loadChildren: () => import('./pages/icons/icons.module').then(m => m.IconsModule), data: { breadcrumb: 'Material Icons' } },
-            // { path: 'updatePassword', component: UpdatePasswordComponent, canActivate: [AuthGuard] },
-            // { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-            // { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-            // { path: 'security/role', component: RoleComponent, canActivate: [AuthGuard] },
-            // { path: 'security/menu', component: MenuComponent, canActivate: [AuthGuard]},
-            // { path: 'security/userSetup', component: UserSetupComponent, canActivate: [AuthGuard]},
-            // { path: 'security/userRoleAssign', component: UserRoleComponent, canActivate: [AuthGuard]}
+            { path: 'icons', loadChildren: () => import('./pages/icons/icons.module').then(m => m.IconsModule), data: { breadcrumb: 'Material Icons' } },
+            { path: 'updatePassword', component: UpdatePasswordComponent, canActivate: [AuthGuard] },
+            { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+            { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+            { path: 'security/role', component: RoleComponent, canActivate: [AuthGuard] },
+            { path: 'security/menu', component: MenuComponent, canActivate: [AuthGuard]},
+            { path: 'security/userSetup', component: UserSetupComponent, canActivate: [AuthGuard]},
+            { path: 'security/userRoleAssign', component: UserRoleComponent, canActivate: [AuthGuard]}
 
 
 

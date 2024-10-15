@@ -1,4 +1,8 @@
 
+
+
+
+
   
  
     <section   class="vh-8000" style=" background-color:  #6bd5f7; overflow-y: auto; height: 910px;">
@@ -436,7 +440,7 @@
 <h5 class="mb-3 h5 text-center">Academic Qualification</h5>
 <hr>
 
-<div formArrayName="academicQualifications">
+ <div formArrayName="academicQualifications">
     <div *ngFor="let qualification of academicQualifications.controls; let i = index" [formGroupName]="i" class="academic-qualification-item">
       <div class="smallDeviceTopCol Qulification_index qualification-type">{{ qualificationType[i] }}</div>
         <div class="form-group">
@@ -447,6 +451,9 @@
                 Degree is required
             </div>
         </div>
+
+   
+
 
         <div class="form-group" >
             <label for="board{{i}}">University / Board:</label>
@@ -496,7 +503,11 @@
         <button type="button" (click)="removeAcademicQualification(i)" class="btn btn-danger form-control"
             [disabled]="academicQualifications.length <= 3">Remove</button>
     </div>
-</div>
+</div> 
+
+
+
+
 
 <!-- Button to Add More Qualifications -->
 <button type="button" (click)="addAcademicQualification()" class="btn btn-primary"
@@ -606,24 +617,14 @@
 
 
 
-
-
-
-
-
-
-
-
     </div>
 
 </section> 
 
 
 
-    
 
 
-    
 
 
 

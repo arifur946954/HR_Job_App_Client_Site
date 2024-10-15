@@ -150,7 +150,7 @@ export class MenuComponent implements OnInit {
 
 
     //Get All Role
-    public _getRoleUrl: string = 'dropdown/getallrole';
+    public _getRoleUrl: string = 'ereqdropdown/getallrole';
     getRoles() {
         var list: Array<{ id, text }> = [{ id: 0, text: "Please Select" }];
         var apiUrl = this._getRoleUrl;
@@ -187,7 +187,7 @@ export class MenuComponent implements OnInit {
     // }
 
     //load parent menu on module change
-    public _getPmenuUrl: string = 'menu/getparentmenu';
+    public _getPmenuUrl: string = 'jobmenu/getparentmenu';
     getParentMenus(IsEdit: boolean) {
         this.parentMenuList = [];
         var list: Array<{ id, text }> = [{ id: 0, text: "Please Select" }];
@@ -225,7 +225,7 @@ export class MenuComponent implements OnInit {
     }
 
     //load sub parent menu on module change
-    public _getSubPmenuUrl: string = 'menu/getsubparentmenu';
+    public _getSubPmenuUrl: string = 'jobmenu/getsubparentmenu';
     getSubParentMenus(event, value, IsEdit) {
         //this.menuForm.controls.parentId.setValue(value);
         if (value !== '') {
@@ -262,7 +262,7 @@ export class MenuComponent implements OnInit {
     }
 
     //Get by ID
-    public _getbyIdUrl: string = 'menu/getbyid';
+    public _getbyIdUrl: string = 'jobmenu/getbyid';
     edit(modelEvnt) {
         modelEvnt.event.preventDefault();
         var param = { id: modelEvnt.model.menuId };
@@ -374,7 +374,7 @@ export class MenuComponent implements OnInit {
         }
     }
 
-    public _saveUrl: string = 'menu/saveupdate';
+    public _saveUrl: string = 'jobmenu/saveupdate';
     onSubmit() {
         if (this.menuForm.invalid) {
             return;
@@ -402,7 +402,7 @@ export class MenuComponent implements OnInit {
     }
 
     //Create
-    public _savePrmsnUrl: string = 'menu/saveupdatepermission';
+    public _savePrmsnUrl: string = 'jobmenu/saveupdatepermission';
     onSubmitPrmsn() {
         if (this.RoleId === undefined || this.RoleId === null || this.RoleId === 0 || this.RoleId.toString() === '0') {
             return;
@@ -449,7 +449,7 @@ export class MenuComponent implements OnInit {
         this.isDelete = false;
     }
 
-    public _getRWMenuUrl: string = 'menu/getoramenubyrole';
+    public _getRWMenuUrl: string = 'jobmenu/getoramenubyrole';
     getRoleWiseMenu(pageIndex: number, isPaging: boolean, pageSize: number, RoleID: number) {
         if (RoleID !== undefined && RoleID !== null) {
             this.pageNumber = pageIndex;
@@ -522,7 +522,7 @@ export class MenuComponent implements OnInit {
 
 
     //Delete
-    public _deleteUrl: string = 'menu/delete';
+    public _deleteUrl: string = 'jobmenu/delete';
     delete(modelEvnt) {
         modelEvnt.event.preventDefault();
         if (modelEvnt.isConfirm) {

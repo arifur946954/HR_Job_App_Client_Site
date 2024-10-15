@@ -53,7 +53,7 @@ export class ApplicantFormComponent implements OnInit{
   public userID;
   public userPassword;
   public user = {};
-
+  public localEmail:string;
 
   public form : FormGroup;
   //public settings: Settings;
@@ -84,10 +84,30 @@ export class ApplicantFormComponent implements OnInit{
   
 
   ngOnInit(){
+    this.localEmail = sessionStorage.getItem('userID');
+    console.log("this.localEmail",this.localEmail)
+    //this.getApplicantInfoById(this.localEmail)
     this.createForm();
     this.addInitialAcademicQualifications();
     
     
+  }
+
+  
+
+  public _getbyIdUrl: string = 'reqform/getapplicantbyid';
+  getApplicantInfoById(localEmail) {
+    //var tstmail="arif@gmail.com"
+      var param = { strId:localEmail };
+      var apiUrl = this._getbyIdUrl
+      this._dataservice.getWithMultipleModel(apiUrl, param)
+          .subscribe(response => {
+              this.res = response;
+              console.log("this.getapplicantbyid",this.res)
+              this.reset();
+          }, error => {
+              console.log(error);
+          });
   }
 
 
