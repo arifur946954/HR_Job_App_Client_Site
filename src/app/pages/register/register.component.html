@@ -74,15 +74,31 @@
                                                         class="form-control form-control-sm input-sm input-sm-*" id="mobileNumber"
                                                         placeholder="Enter Mobile Number " name="mobileNumber">
 
-                                                        <small style="width: 100%; color: #ffffff !important;"
+                                                        <!-- <small style="width: 100%; color: #ffffff !important;"
                                                         class="text-danger"
                                                         *ngIf="RegisterForm.controls['mobileNumber'].touched && RegisterForm.controls['mobileNumber'].errors?.required">
                                                         MobileNumber is required</small>
+                                            
+                                                        <small style="width: 100%; color: #ffffff !important;"
+                                                        class="text-danger"
+                                                        *ngIf="RegisterForm.controls['mobileNumber'].hasError('maxlength')">
+                                                        mobileNumber  must be 11 digits</small>
     
                                                  <small style="width: 100%; color: #ffffff !important;"
                                                         class="text-danger"
                                                         *ngIf="RegisterForm.controls['mobileNumber'].hasError('minlength')">
                                                         mobileNumber  must be 11 digits</small>
+
+                                                        <small style="width: 100%; color: #ffffff !important;"
+                                                        class="text-danger"
+                                                        *ngIf="RegisterForm.controls['mobileNumber'].hasError('pattern')">
+                                                        Mobile Number must start with 01 and be 11 digits long</small> -->
+
+                                                        <div *ngIf="RegisterForm.controls['mobileNumber'].invalid && RegisterForm.controls['mobileNumber'].touched">
+                                                            <small *ngIf="RegisterForm.controls['mobileNumber'].hasError('required')">Mobile Number is required</small>
+                                                            <small *ngIf="RegisterForm.controls['mobileNumber'].hasError('pattern')">Mobile Number must start with 01 and be 11 digits long</small>
+                                                            <small *ngIf="RegisterForm.controls['mobileNumber'].hasError('minlength') || RegisterForm.controls['mobileNumber'].hasError('maxlength')">Mobile Number must be 11 digits</small>
+                                                          </div> 
 
                                                      
 
@@ -118,6 +134,11 @@
                                                         class="text-danger"
                                                         *ngIf="RegisterForm.controls['email'].hasError('minlength')">
                                                         email  must be 10 Character</small>
+
+                                                        <small style="width: 100%; color: #ffffff !important;"
+                                                        class="text-danger"
+                                                        *ngIf="RegisterForm.controls['email'].hasError('pattern')">
+                                                        Must Be Valid Email </small>
                                                 </div>
                                                 <span class="ml-1 mt-2 text-danger pull-left">*</span>
                                             </div>

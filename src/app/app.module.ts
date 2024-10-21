@@ -65,6 +65,33 @@ import { NgxDocViewerModule } from  'ngx-doc-viewer';
 import { DashboardComponent } from './project_component/dashboard/dashboard.component';
 
 
+
+
+
+
+import { ClientTypeComponent } from './project_component/businessSetup/clientType/clienttype.component';
+import { ClientComponent } from './project_component/businessSetup/client/client.component';
+import { WorkOrderComponent } from './project_component/businessSetup/workorder/workorder.component';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { DatePipe } from '@angular/common';
 import {UtilService} from '../app/util/util.service'
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -89,6 +116,7 @@ import { NgxUiLoaderModule } from "ngx-ui-loader";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ChartsModule } from 'ng2-charts';
 import { UserSetupComponent } from './project_component/security/userSetup/userSetup.component';
+//import { ApplicantFormsComponent } from './project_component/applicant/applicant/applicantforms.component';
 
 //import { HomesComponent } from './pages/homes/homes.component';
 
@@ -155,6 +183,8 @@ import { UserSetupComponent } from './project_component/security/userSetup/userS
     MenuComponent,
     UserRoleComponent
     
+//,ApplicantFormsComponent
+
     ,ReportViewer
     ,ConfirmModal
     ,CommonService
@@ -164,9 +194,22 @@ import { UserSetupComponent } from './project_component/security/userSetup/userS
     ,CmnDocModal
     ,DocUpload 
    
-    ,UserSetupComponent, 
+    ,UserSetupComponent
  
-    //HomesComponent,  
+   
+
+   
+
+
+
+    ,ClientTypeComponent
+    ,ClientComponent
+    ,WorkOrderComponent
+
+
+   
+
+ 
   ],
   exports: [
     

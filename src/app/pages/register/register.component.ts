@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit{
   public form : FormGroup;
   public settings: Settings;
   public RegisterForm: FormGroup;
+  public addApplicantRolesGroup: FormGroup;
   public resmessage: string;
   public fullName:string;
   public email:string;
@@ -66,7 +67,7 @@ export class RegisterComponent implements OnInit{
 
   ngOnInit(){
     this.createForm();
-    //$('#clientName').focus();
+
     
   }
 
@@ -77,28 +78,60 @@ export class RegisterComponent implements OnInit{
     this.RegisterForm = this.formBuilder.group({
         oid: null,
         userid: null,
-        empId: null,
-        mobileNumber: new FormControl(null, [Validators.required,Validators.minLength(11)]),
+        username:null,
+        //mobileNumber: new FormControl(null, [Validators.required,Validators.minLength(11)]),
+        mobileNumber: new FormControl(null, [
+          Validators.required, 
+          Validators.minLength(11), 
+          Validators.maxLength(11), 
+          Validators.pattern(/^01\d{9}$/), // Pattern to ensure it starts with 01 and has 11 digits
+         
+      ]),
         password: new FormControl(null, [Validators.required,Validators.minLength(5)]),
         fullName: new FormControl(null, [Validators.required,Validators.minLength(6)]),
         isActive: true,
-        email: new FormControl(null, [Validators.required,Validators.minLength(4)]),
+        //email: new FormControl(null, [Validators.required,Validators.minLength(4)]),
+        email:  new FormControl(null, [
+          Validators.required,
+          Validators.email, // Ensures valid email format
+          Validators.pattern(/.+@.+/) // Ensures '@' is present in the email
+      ]),
         photo: null,
         designation: "Applicant",
         department: null,
-        isReg: null,
-     
+       // isReg: null,
+      
     });
+    this.addApplicantRoles();
+}
+
+addApplicantRoles() {
+   this.addApplicantRolesGroup = this.formBuilder.group({
+    userId: null,
+    roleId: 10,
+    userroleId: null
+   
+  });
+}
+
+onSubmit(){
+  this.RegisterForm.controls['userid'].setValue(this.RegisterForm.controls['email'].value);
+  this.RegisterForm.controls['username'].setValue(this.RegisterForm.controls['fullName'].value);
+  this.addApplicantRolesGroup.controls['userId'].setValue(this.RegisterForm.controls['email'].value);
+
+  this.onSubmits()
+  console.log(" this.RegisterForm.controls.userid", this.RegisterForm.controls)
 }
 
 
+
 public _saveUrl: string = 'register/saveupdate';
-onSubmit() {
+onSubmits() {
   debugger
 
     //var param = { loggedUserId: this.userID };
     var param = { loggedUserId: "Applicant" };
-    var ModelsArray = [param, this.RegisterForm.value];
+    var ModelsArray = [param, this.RegisterForm.value,this.addApplicantRolesGroup.value];
     var apiUrl = this._saveUrl;
     this._dataservice.postMultipleModel(apiUrl, ModelsArray)
         .subscribe(response => {
@@ -119,7 +152,7 @@ reset() {
   this.RegisterForm.setValue({
     oid: null,
     userid: null,
-    empId: null,
+    username:null,
     mobileNumber: null,
     password: null,
     fullName: null,
@@ -128,7 +161,7 @@ reset() {
     photo: null,
     designation: null,
     department: null,
-    isReg: null,
+    //isReg: null,
   });
 
   // this.resmessage = null;

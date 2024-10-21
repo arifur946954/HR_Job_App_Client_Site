@@ -12,6 +12,17 @@ import { DashboardComponent } from './project_component/dashboard/dashboard.comp
 
 
 
+
+import { ClientTypeComponent } from './project_component/businessSetup/clientType/clienttype.component';
+import { ClientComponent } from './project_component/businessSetup/client/client.component';
+import { WorkOrderComponent } from './project_component/businessSetup/workorder/workorder.component';
+
+
+
+
+
+
+
 import { AuthGuard } from '../app/guard/auth.guard';
 import { RoleGuard } from '../app/guard/role.guard';
 import { RoleComponent } from './project_component/security/role/role.component';
@@ -19,6 +30,7 @@ import { MenuComponent } from './project_component/security/menu/menu.component'
 //import { RoleMenuComponent } from './project_component/security/role-menu/role-menu.component';
 import { UserRoleComponent } from './project_component/security/user-role/user-role.component';
 import { UserSetupComponent } from './project_component/security/userSetup/userSetup.component';
+//import { ApplicantFormsComponent } from './project_component/applicant/applicant/applicantforms.component';
 //import { HomesComponent } from './pages/homes/homes.component';
 
  
@@ -47,11 +59,21 @@ export const routes: Routes = [
             { path: 'security/role', component: RoleComponent, canActivate: [AuthGuard] },
             { path: 'security/menu', component: MenuComponent, canActivate: [AuthGuard]},
             { path: 'security/userSetup', component: UserSetupComponent, canActivate: [AuthGuard]},
-            { path: 'security/userRoleAssign', component: UserRoleComponent, canActivate: [AuthGuard]}
+            { path: 'security/userRoleAssign', component: UserRoleComponent, canActivate: [AuthGuard]},
+            { path: 'businessSetup/workorder', component: WorkOrderComponent, canActivate: [AuthGuard]},
+           // { path: 'applicant/applicantforms',component: ApplicantFormsComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['/applicant/applicantforms']} },//, RoleGuard
 
 
 
 
+
+
+        
+           { path: 'businessSetup/clienttype', component: ClientTypeComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['/businessSetup/clienttype']} },//, RoleGuard
+           { path: 'businessSetup/client', component: ClientComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['/businessSetup/client']} },//, RoleGuard
+           //{ path: 'businessSetup/workorder', component: WorkOrderComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['/businessSetup/workorder']} },//, RoleGuard
+          
+          
            
          
         ]

@@ -84,7 +84,7 @@ export class RoleComponent implements OnInit {
         });
     }
 
-    public _getUrl: string = 'role/getbypage';
+    public _getUrl: string = 'erole/getbypage';
     getRoleByPage(pageIndex: number, isPaging: boolean, pageSize: number) {
         this.pageNumber = pageIndex;
         var param = { pageNumber: pageIndex, pageSize: pageSize, IsPaging: isPaging };
