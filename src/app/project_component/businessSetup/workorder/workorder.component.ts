@@ -397,8 +397,9 @@ onSubmit(): void {
   
   const reqform = formValues;
   const acaQlf = this.academicQualifications.value;
+ 
   const wrkExp = this.workExperiences.value;
-  
+  console.log("wrkExp",wrkExp)
   const param = { 
     loggedUserId: '08427', 
     strId: this.requirementForm.controls.applicantId.value, 

@@ -84,7 +84,6 @@ export class VerticalMenuComponent implements OnInit {
         response => {
           debugger;
           this.res = response;
-          console.log(" this.res", response)
           var parentMenues = [];
           var childMenues = [];
           var subChildMenues = [];

@@ -16,6 +16,7 @@ import { DashboardComponent } from './project_component/dashboard/dashboard.comp
 import { ClientTypeComponent } from './project_component/businessSetup/clientType/clienttype.component';
 import { ClientComponent } from './project_component/businessSetup/client/client.component';
 import { WorkOrderComponent } from './project_component/businessSetup/workorder/workorder.component';
+import { JobPostComponent } from './project_component/jobpost/jobpost.component';
 
 
 
@@ -60,7 +61,7 @@ export const routes: Routes = [
             { path: 'security/menu', component: MenuComponent, canActivate: [AuthGuard]},
             { path: 'security/userSetup', component: UserSetupComponent, canActivate: [AuthGuard]},
             { path: 'security/userRoleAssign', component: UserRoleComponent, canActivate: [AuthGuard]},
-            { path: 'businessSetup/workorder', component: WorkOrderComponent, canActivate: [AuthGuard]},
+           // { path: 'businessSetup/workorder', component: WorkOrderComponent, canActivate: [AuthGuard]},
            // { path: 'applicant/applicantforms',component: ApplicantFormsComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['/applicant/applicantforms']} },//, RoleGuard
 
 
@@ -71,6 +72,8 @@ export const routes: Routes = [
         
            { path: 'businessSetup/clienttype', component: ClientTypeComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['/businessSetup/clienttype']} },//, RoleGuard
            { path: 'businessSetup/client', component: ClientComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['/businessSetup/client']} },//, RoleGuard
+           { path: 'businessSetup/workorder', component: WorkOrderComponent, canActivate: [AuthGuard], data: {roles: ['/businessSetup/workorders']} },
+           { path: 'jobPost', component: JobPostComponent, canActivate: [AuthGuard], data: {roles: ['/jobPost']} }
            //{ path: 'businessSetup/workorder', component: WorkOrderComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['/businessSetup/workorder']} },//, RoleGuard
           
           

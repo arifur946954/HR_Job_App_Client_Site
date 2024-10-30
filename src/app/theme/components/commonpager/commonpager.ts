@@ -172,7 +172,7 @@ export class CommonPager implements OnInit {
             .then(
                 response => {
                     this.res = response;
-                    console.log("this.res for work order is",this.res)
+                    console.log("this.res job post is",this.res)
                     this.itemListByPage = [];
                     if (this.res.resdata[this.responseTag] !== '' && this.res.resdata[this.responseTag] !== null) {
                         this.itemListByPage = JSON.parse(this.res.resdata[this.responseTag]);
