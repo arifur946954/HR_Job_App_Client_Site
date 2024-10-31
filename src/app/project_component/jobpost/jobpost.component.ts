@@ -182,13 +182,13 @@ getListByPages(pageIndex: number, isPaging: boolean, pageSize, searchVal: string
   get applicantSkill(): FormArray {
     return this.jobPostForm.get('applicantSkill') as FormArray;
   }
-  
+  //
   addSkill() {
     const experienceGroup = this.formBuilder.group({
       applicantSkillId: null,
       jobPostId: null,
       skill: [null, Validators.required],
-    });
+    }); 
   
     this.applicantSkill.push(experienceGroup);
     console.log("this.applicantSkill.",this.applicantSkill)
