@@ -58,6 +58,7 @@ export class JobPostComponent implements OnInit {
       //this.options = this._pathValidation.ngSelect2Option();
      this.settings = this.appSettings.settings;
      this.cmnEntity = this._pathValidation.rowEntities();
+     
 
  
   }
