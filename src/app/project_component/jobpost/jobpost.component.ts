@@ -17,6 +17,8 @@ import { Settings } from 'src/app/app.settings.model';
 import { AppSettings } from 'src/app/app.settings';
 import { pathValidation } from 'src/app/api/api.pathvlidation.service';
 import { DataService } from 'src/app/api/api.dataservice.service';
+import { PagerService } from 'src/app/api/api.pager.service';
+import { Conversion } from 'src/app/api/api.conversion.service';
 
 declare var $: any;
 
@@ -24,6 +26,7 @@ declare var $: any;
     selector: 'app-jobpost',
     templateUrl: './jobpost.component.html',
     styleUrls: ['./jobpost.component.scss'],
+    providers: [PagerService]
     //providers: [Conversion]
 })
 
@@ -49,6 +52,7 @@ export class JobPostComponent implements OnInit {
     private _pathValidation: pathValidation,
     private formBuilder: FormBuilder,
     public fb: FormBuilder, 
+    //private _conversion: Conversion,
     public router:Router, 
     public _apiService : ApiService, 
     private toastr: ToastrService,
@@ -57,15 +61,23 @@ export class JobPostComponent implements OnInit {
     ){
       //this.options = this._pathValidation.ngSelect2Option();
      this.settings = this.appSettings.settings;
+     this._pathValidation.validate(this.document.location);
      this.cmnEntity = this._pathValidation.rowEntities();
      
 
  
   }
   
-
+  getNameToNumDate(strDate: string) {
+    debugger;
+    var nDate = new Date(strDate);
+    var Nowdate = nDate.getFullYear() + '-' + ('0' + (nDate.getMonth() + 1)).slice(-2) + '-' + ('0' + nDate.getDate()).slice(-2);
+    return Nowdate;
+    
+}
   ngOnInit(){
     this.createForm();
+
   
   }
   cmnbtnAction(evmodel) {
@@ -90,54 +102,63 @@ setToggling(divName) {
 
 
 
-public jobPostList: any = [];
-public jobPostLists: any = [];
-public _listByPageUrl: string = 'jobpost/getbypages';
-getListByPage(pageSize) {
+// public jobPostList: any = [];
+// public jobPostLists: any = [];
+// public _listByPageUrl: string = 'jobpost/getbypages';
+// getListByPage(pageSize) {
 
-  this.getListByPages(1, true, pageSize, '');
+//   this.getListByPages(1, true, pageSize, '');
 
-}
-getListByPages(pageIndex: number, isPaging: boolean, pageSize, searchVal: string) {
+// }
+// getListByPages(pageIndex: number, isPaging: boolean, pageSize, searchVal: string) {
        
-  this.settings.loadingSpinnerOnAction = true;
-  this.pageSize=parseInt(pageSize);
-  var param = {
-      pageNumber: pageIndex
-      , pageSize: this.pageSize
-      , isPaging: isPaging
-      , searchVal: searchVal
-      , loggedUserId: this.loggedUserId
+
+//   this.pageSize=parseInt(pageSize);
+//   var param = {
+//       pageNumber: pageIndex
+//       , pageSize: this.pageSize
+//       , isPaging: isPaging
+//       , searchVal: searchVal
+//       , loggedUserId: this.loggedUserId
       
-  };
-  this._dataservice.getWithMultipleModel_Sync(this._listByPageUrl, param)
-
-      .then(
-          response => {
-            this.res = response;
-            console.log("   this.response", this.res)
-              this.itemListByPage = JSON.parse(this.res.resdata.listJobPost);
-              this.jobPostList=this.itemListByPage;
+//   };
+//   this._dataservice.getWithMultipleModel_Sync(this._listByPageUrl, param)
+//       .then(
+//           response => {
+//             this.res = response;
+//             console.log("   this.response", this.res)
+//               this.itemListByPage = JSON.parse(this.res.resdata.listJobPost);
+//               this.jobPostList=this.itemListByPage;
           
-              console.log("   this.response", this.jobPostList)
-              if (this.jobPostList.length > 0) {
-                this.jobPostList.forEach((item, index) => {
-                    item.isActive = item.isActive == '1' ? true : false;
-                });
+//               console.log("   this.response", this.jobPostList)
+//               if (this.jobPostList.length > 0) {
+//                 this.jobPostList.forEach((item, index) => {
+//                     item.isActive = item.isActive == '1' ? true : false;
+//                 });
     
-                this.jobPostLists = this.jobPostList;
+//                 this.jobPostLists = this.jobPostList;
            
-            }
+//             }
         
-          }, error => {
-              console.log(error);
-          }
-      );
+//           }, error => {
+//               console.log(error);
+//           }
+//       );
+// }
+
+public responseTag: string = 'listJobPost';
+public jobPostLists: any = [];
+public _listByPageUrl: string = 'jobpost/getbypages/';
+getListByPage(pageSize) {
+  setTimeout(() => {
+    this._pg.getListByPage(1, true, pageSize, '');
+      setTimeout(() => {
+      }, 300);
+  }, 0);
 }
-
-
-
-
+sendToList(ev) {
+  this.jobPostLists = ev;
+}
 
 
 
@@ -174,9 +195,67 @@ getListByPages(pageIndex: number, isPaging: boolean, pageSize, searchVal: string
     
   }
 
+  public _getbyIdUrl: string = 'jobpost/getbyid';
+  edit(modelEvnt) {
+      debugger;
+      modelEvnt.event.preventDefault();
+      //var param = { strId: modelEvnt.model.quotationId, strId2: modelEvnt.model.categoryId };
+      var param = { strId: modelEvnt.model.jobOid, strId2: modelEvnt.model.categoryId };
+      var apiUrl = this._getbyIdUrl
+      this._dataservice.getWithMultipleModel(apiUrl, param)
+          .subscribe(response => {
+              this.res = response;
+              console.log("this.Total data ",this.res)
+              if (this.res.resdata.jobPostMaster != '') {
+                var jobPost = JSON.parse(this.res.resdata.jobPostMaster)[0];
+                console.log("this.jobPost",jobPost)
+                debugger;
+                this.jobPostForm.setValue({
+                  jbPostId: jobPost.jbPostId,
+                  jobTitle: jobPost.jobTitle,
+                  company: jobPost.company,
+                  department:jobPost.department,
+                  post: jobPost.post,
+                  startDate: jobPost.startDate == null ? null : this.getNameToNumDate(jobPost.startDate),
+                  //startDate:jobPost.startDate,
+                  //endDate: jobPost.endDate,
+                  endDate: jobPost.endDate == null ? null : this.getNameToNumDate(jobPost.endDate),
+                  education: jobPost.education,
+                  experience: jobPost.experience,
+                  workPlace: jobPost.workPlace,
+                  employeeStatus: jobPost.employeeStatus,
+                  jobLocation: jobPost.jobLocation,
+                  criteria:jobPost.criteria,
+                  address: jobPost.address,
+                  business: jobPost.business,
+                  salaryRange: jobPost.salaryRange,
+                  isActive: jobPost.isActive,
+                  applicantSkill: this.formBuilder.array([]), 
+                  applicantResponsibility: this.formBuilder.array([]),
+                  applicantRequirement: this.formBuilder.array([]),
+                  applicantOtherRequirement: this.formBuilder.array([]),
+                  applicantBenifit: this.formBuilder.array([]),
+
+                });
+                 
+               
+          
+            }
+           
+              this.reset();
+              console.log("this.this.jobPostForm",this.jobPostForm)
+          
+          }, error => {
+              console.log(error);
+          });
+  }
+
+
   onCheckboxChange(event: any) {
+    debugger
     const isChecked = event.target.checked;
     this.jobPostForm.get('isActive')?.setValue(isChecked ? true : false);
+    console.log(" this.jobPostForm", this.jobPostForm)
 }
   
 //SKILL
@@ -293,6 +372,7 @@ getListByPages(pageIndex: number, isPaging: boolean, pageSize, searchVal: string
 
   public _saveUrl: string = 'jobpost/saveupdate';
   onSubmit(): void {
+    debugger
     let formValues = { ...this.jobPostForm.value };
     delete formValues.applicantSkill;
     delete formValues.applicantResponsibility;
@@ -339,15 +419,33 @@ getListByPages(pageIndex: number, isPaging: boolean, pageSize, searchVal: string
   reset() {
 
     this.jobPostForm.setValue({
-        quotationId: null,
-
-
-
+      jbPostId: null,
+      jobTitle:null,
+      company: null,
+      department:null,
+      post:null,
+      startDate: null,
+      endDate: null,
+      education: null,
+      experience: null,
+      workPlace: null,
+      employeeStatus: null,
+      jobLocation: null,
+      criteria: null,
+      address:null,
+      business: null,
+      salaryRange: null,
+      isActive: null,
+      applicantSkill: this.formBuilder.array([]), 
+      applicantResponsibility: this.formBuilder.array([]),
+      applicantRequirement: this.formBuilder.array([]),
+      applicantOtherRequirement: this.formBuilder.array([]),
+      applicantBenifit: this.formBuilder.array([]),
 
     })}
 
 
-
+ 
 
 
 

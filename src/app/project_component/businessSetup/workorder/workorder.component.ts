@@ -36,6 +36,7 @@ export class WorkOrderComponent implements OnInit {
   @ViewChild(ReportViewer) _rptViewer: ReportViewer;
   public settings: Settings;
   public options: Options;
+  public cmnEntity: any = {};
   
   public requirementForm: FormGroup;
   religionList: string[] = ['Islam', 'Hindu', 'Christianity', 'Buddhism', 'Other'];
@@ -97,7 +98,15 @@ export class WorkOrderComponent implements OnInit {
     
   }
 
-  
+  cmnbtnAction(evmodel) {
+    debugger
+    this[evmodel.func](evmodel);
+}
+
+showHide() {
+    debugger;
+    //this.cmnEntity.isShow ? this.reset() : this.getListByPage(this.pageSize);
+}
 
   public _getbyIdUrl: string = 'reqform/getapplicantbyid';
   getApplicantInfoById(localEmail) {

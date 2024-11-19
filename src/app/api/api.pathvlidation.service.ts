@@ -9,7 +9,7 @@ import { DataService } from 'src/app/api/api.dataservice.service';
 export class pathValidation {
     public rowEntity: any = {};
     public resm: any;
-    public _getUrl: string = 'menu/getmenubyparam';
+    public _getUrl: string = 'jobmenu/getmenubyparam';
 
     public userDefinedButton: any = [
         { btnId: 0, btnName: 'Reset', rbtnName: 'Reset', bClass: 'btn btn-danger btn-sm', rbClass: 'btn btn-danger btn-sm', iClass: 'fa fa-refresh', riClass: 'fa fa-refresh', btnFunc: 'reset', btnForm: '', isReverse: false, isShowBtn: true, message: '', isDual: false, isValid: false },

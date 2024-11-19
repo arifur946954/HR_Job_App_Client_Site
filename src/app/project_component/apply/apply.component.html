@@ -1,0 +1,23 @@
+
+<div *ngIf="jobPostList.length>0">
+<div style="" class="container mt-4">
+    <div class="row">
+      <div class="col-md-4 mb-3" *ngFor="let job of jobPostList">
+        <div  class="card" style="width: 20rem;">
+          <div  class="card-body">
+            <h6 style="height: 40px;"  class="card-title">{{ job.jobTitle }}</h6>
+            <hr>
+            <p class="card-text"><strong>Company:</strong> {{ job.company }}</p>
+            <p class="card-text"><strong>Department:</strong> {{ job.department }}</p>
+            <a style="margin-top: 5px; color: white;" (click)="showDetails(job)" class="btn btn-primary">Apply</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+
+ 

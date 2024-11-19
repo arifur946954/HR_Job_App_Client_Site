@@ -231,7 +231,7 @@ style="height: 30px; border: 1px solid #ccc; background-color: #138496;">
                     formControlName="isActive" name="isActive"
                     checked id="isActive"
                     (change)="onCheckboxChange($event)"  
-                    [(ngModel)]="isActive"
+                  
                     >
                    
                   </div>
@@ -318,7 +318,7 @@ style="height: 30px; border: 1px solid #ccc; background-color: #138496;">
                       <div style="padding: 0px; width: 96.5%; font-size: 13px; float: left;">
                         <textarea rows="1" cols="3" formControlName="requirement"
                                   class="form-control form-control-sm input-sm input-sm-*"
-                                  id="skill" placeholder="Applicant Skill" name="requirement"></textarea>
+                                  id="skill" placeholder="Applicant Requirement" name="requirement"></textarea>
                       </div>
                     </div>
                     
@@ -426,7 +426,7 @@ style="height: 30px; border: 1px solid #ccc; background-color: #138496;">
 
 
 
-<button  (click)="onSubmit()"     type="submit" class="SubmitButton  btn btnb btn-primary btn-lg btn-block">Submit</button>  
+<!-- <button  (click)="onSubmit()"     type="submit" class="SubmitButton  btn btnb btn-primary btn-lg btn-block">Submit</button>   -->
   
 </form>
 
@@ -436,10 +436,10 @@ style="height: 30px; border: 1px solid #ccc; background-color: #138496;">
 
 
         <div *ngIf="cmnEntity.isShow" class="card-body pl-0 pr-4 pt-2"
-                    style="min-height: 460px; margin-bottom: -20px;">
-                    <h1>hello world</h1>
-
-                    <div class="row">
+        
+                    style="min-height: 460px; margin-bottom: -20px; margin-top: 5px;">
+                  
+                    <div class="row" style="margin-bottom: 10px;">
                         <div class="col-md-12">
                             <pager-top (setPage)="getListByPage($event)" (sendList)="sendToList($event)"
                                 [loggedUserId]="loggedUserId" [pageSize]="pageSize" [IsSearchOnServer]="true"
@@ -447,6 +447,7 @@ style="height: 30px; border: 1px solid #ccc; background-color: #138496;">
                             </pager-top>
                         </div>
                     </div>
+                 
 
                     <div style="margin-top: -30px;" class="form-group clearfix d-flex justify-content-center align-items-center">
                         <div class="col-sm-1 p-0 m-0">
@@ -480,7 +481,10 @@ style="height: 30px; border: 1px solid #ccc; background-color: #138496;">
                                                 Post</th>
                                             <th
                                                 style="position:sticky; top:-1.5px; z-index:1; cursor: pointer; text-align: left;">
-                                                Eduvcation</th>
+                                                Education</th>
+                                                <th
+                                                style="position:sticky; top:-1.5px; z-index:1; cursor: pointer; text-align: left;">
+                                                Start Date</th>
                                             <th
                                                 style="position:sticky; top:-1.5px; z-index:1; cursor: pointer; text-align: left;">
                                                 End Date</th>
@@ -491,6 +495,11 @@ style="height: 30px; border: 1px solid #ccc; background-color: #138496;">
                                             <th
                                                 style="position:sticky; top:-1.5px; z-index:1; cursor: pointer; text-align: center;">
                                                 Status</th>
+                                             <th
+                                                style="position:sticky; top:-1.5px; z-index:1; cursor: pointer; text-align: center; width: 10%;">
+                                                Action</th>
+
+                                                
                                           
                                         </tr>
                                     </thead>
@@ -511,17 +520,26 @@ style="height: 30px; border: 1px solid #ccc; background-color: #138496;">
                                             <td class="pl-2 pr-1 pt-1 pb-1">{{item.department}}</td>
                                             <td class="pl-2 pr-1 pt-1 pb-1">{{item.post}}</td>
                                             <td class="pl-2 pr-1 pt-1 pb-1">{{item.education}}</td>
+                                            <td class="pl-2 pr-1 pt-1 pb-1">{{item.startDate}}</td>
                                             <td class="pl-2 pr-1 pt-1 pb-1">{{item.endDate}}</td>
                                         
-                                            <td class="pl-2 pr-1 pt-1 pb-1">{{item.employeeStatus}}</td>
-
+                                            <td class="pl-2 pr-1 pt-1 pb-1">{{item.eployeementStatus}}</td>
 
                                         
-                                            <td class="pl-2 pr-1 pt-1 pb-1" style="text-align: center;" width="5%">
+                                              
+                                        
+                                             <td class="pl-2 pr-1 pt-1 pb-1" style="text-align: center;" width="5%">
                                                 <h6><span
                                                         class="badge badge-pill badge-{{item.isActive?'success':'danger'}}">{{item.isActive?'Active':'Inactive'}}</span>
                                                 </h6>
-                                            </td>
+                                            </td> 
+
+                                            <td class="pl-2 pr-1 pt-1 pb-1" style="text-align: center; width: 12%;">
+                                                <common-button-option #cmnbuttonoption style="float: left;"
+                                                    (executeSubmit)="cmnbtnAction($event)" [cmnEntity]="cmnEntity"
+                                                    [model]="item" [itemName]="item.quotationRefNo">
+                                                </common-button-option>
+                                                </td>
 
                                           
                                         </tr>
@@ -545,13 +563,19 @@ style="height: 30px; border: 1px solid #ccc; background-color: #138496;">
 
 
 
+                <!-- <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                    <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
+                  </div> -->
+                  
+                  
+                  
 
 
+              
 
 
-
-
-
+             
 
 
 

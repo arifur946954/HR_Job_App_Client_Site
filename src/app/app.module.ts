@@ -117,6 +117,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { ChartsModule } from 'ng2-charts';
 import { UserSetupComponent } from './project_component/security/userSetup/userSetup.component';
 import { JobPostComponent } from './project_component/jobpost/jobpost.component';
+import { ApplyComponent } from './project_component/apply/apply.component';
 //import { ApplicantFormsComponent } from './project_component/applicant/applicant/applicantforms.component';
 
 //import { HomesComponent } from './pages/homes/homes.component';
@@ -207,6 +208,7 @@ import { JobPostComponent } from './project_component/jobpost/jobpost.component'
     ,ClientComponent
     ,WorkOrderComponent
     ,JobPostComponent
+    ,ApplyComponent
 
 
    
