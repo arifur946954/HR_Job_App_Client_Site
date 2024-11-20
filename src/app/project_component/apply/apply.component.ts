@@ -47,6 +47,15 @@ export class ApplyComponent implements OnInit {
   public listJobPost: any;
   public itemListByPage: any = [];
   public  jobPostList:any;
+  public skillList:any;
+  public benifitList:any;
+  public requirementList:any;
+  public otherRequirementList:any;
+  public responsibilityList:any;
+  public masterList:any;
+  public masterDiv:boolean=true;
+  public detailDiv:boolean=false;
+  public applyForm:boolean=false
 
 
   constructor(public appSettings:AppSettings, 
@@ -168,19 +177,33 @@ getList() {
     });
     
   }
-
+public masterListDetails:any;
   public _getbyIdUrl: string = 'jobpost/getbyid';
   showDetails(modelEvnt) {
       debugger;
       console.log("modelEvnt",modelEvnt)
-      //modelEvnt.event.preventDefault();
-      //var param = { strId: modelEvnt.model.quotationId, strId2: modelEvnt.model.categoryId };
       var param = { strId: modelEvnt.jobOid, strId2: modelEvnt.jobOid };
       var apiUrl = this._getbyIdUrl
       this._dataservice.getWithMultipleModel(apiUrl, param)
           .subscribe(response => {
+            this.masterDiv=false;
               this.res = response;
-              console.log("this.Total data ",this.res)
+              this.detailDiv=true;
+              this.masterList=JSON.parse(this.res.resdata.jobPostMaster)
+              this.masterListDetails=this.masterList[0];
+              console.log("this.Total test test -------------------",(this.masterListDetails))
+              this.skillList=JSON.parse(this.res.resdata.jobSkill)
+              this.benifitList=JSON.parse(this.res.resdata.jobBenefit)
+              this.requirementList=JSON.parse(this.res.resdata.jobRequirement)
+              this.otherRequirementList=JSON.parse(this.res.resdata.jobOtherRequirement)
+              this.responsibilityList=JSON.parse(this.res.resdata.jobResponsibility)
+              console.log("this.Total data -------------------",(this.masterList))
+              console.log("this.Total skillList ",(this.skillList))
+              console.log("this.Total benifitList ",(this.benifitList))
+              console.log("this.Total requirementList ",(this.requirementList))
+              console.log("this.Total otherRequirementList ",(this.otherRequirementList))
+              console.log("this.Total responsibilityList ",(this.responsibilityList))
+
         
            
 
@@ -194,7 +217,9 @@ getList() {
 
 
   
+showHtml(){
 
+}
  
 
 

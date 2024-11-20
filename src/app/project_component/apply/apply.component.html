@@ -1,6 +1,6 @@
 
-<div *ngIf="jobPostList.length>0">
-<div style="" class="container mt-4">
+<div *ngIf=" masterDiv && jobPostList.length>0">
+<div style="" class="master  container mt-4">
     <div class="row">
       <div class="col-md-4 mb-3" *ngFor="let job of jobPostList">
         <div  class="card" style="width: 20rem;">
@@ -20,4 +20,127 @@
 
 
 
+ <!-- <div style="width: 100%;" *ngIf="detailDiv" class="">
+ <tr *ngFor=" let mstr of masterList">
+  <div style="width: 100%; background-color: #ffffff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+    <div style="font-size: 16px; font-weight: bold; color: #333;">UI & UX Designer</div>
+    <button style="background-color: #f56565; color: white; border: none; padding: 10px 20px; border-radius: 4px; font-size: 14px; cursor: pointer; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
+      Apply Now
+    </button>
+  </div>
+  
+ </tr>
+ </div> -->
+
+
+ <div style="width: 80%; margin-left: 5%; margin-top: 10px;" *ngIf="detailDiv" class="">
+ <div style="width: 100%; background-color: #ffffff; padding: 15px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+  <div style="font-size: 16px; font-weight: bold; color: #333;">{{masterListDetails.post}}</div>
+  <button style="background-color: #f56565; color: white; font-weight: bold; border: none; padding: 10px 20px; border-radius: 4px; font-size: 14px; cursor: pointer; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
+    Apply Now
+  </button>
+</div>
+
+
+
+
+<div style="width: 100%;  background-color: #ffffff;  padding: 15px;  border-radius: 8px;  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); 
+   justify-content: space-between;  align-items: center;  margin-top: 30px;">
+  
+  <div style="font-size: 16px; font-weight: bold; color: blue;">
+    General Information :
+  </div>
+
+  <div class="generalInformation">
+    <div style="display: grid; grid-template-columns: 1fr 4fr; gap: 1px; align-items: center;">
+      <div style="font-weight: bold; padding: 5px 0; text-align: left;">Location:</div>
+      <div style="padding: 5px 0; text-align: left;">{{masterListDetails.jobLocation}}</div>
+    
+      <div style="font-weight: bold; padding: 5px 0; text-align: left;">Deadline:</div>
+      <div style="padding: 5px 0; text-align: left;">{{masterListDetails.endDate}}</div>
+    
+      <div style="font-weight: bold; padding: 5px 0; text-align: left;">Salary Range:</div>
+      <div style="padding: 5px 0; text-align: left;">{{masterListDetails.salaryRange}}</div>
+
+      <div style="font-weight: bold; padding: 5px 0; text-align: left;">Employeement Status:</div>
+      <div style="padding: 5px 0; text-align: left;">{{masterListDetails.employeeStatus}}</div>
+    </div>
+</div>
+</div>
+
+
+<div style="width: 100%;  background-color: #ffffff;  padding: 15px;  border-radius: 8px;  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); 
+   justify-content: space-between;  align-items: center;  margin-top: 30px;">
+
+   <div class="Requirement">
+<h6 style="color: blue;" class="requirement">Requirement : </h6>
+<hr>
+<div *ngFor="let req of requirementList">
+  <ul style="padding-left: 2%;margin: 0;">
+    <li>{{req.requirement}}</li>
+  </ul>
+</div>
+</div>
+
+<div class="Other Requirement">
+<h6 style="color: blue; padding-top: 2%;" class="requirement">Other Requirement: </h6>
+<hr>
+<div *ngFor="let otReq of otherRequirementList">
+  <ul style="padding-left: 2%; margin: 0;">
+    <li style="margin-bottom: 5px;">{{otReq.otherRequirement}}</li>
+  </ul>
+</div>
+</div>
+
+<div class="Responsibility" >
+<h6 style="color: blue; padding-top: 2%;" class="requirement">Responsibility: </h6>
+<hr>
+<div *ngFor="let res of responsibilityList">
+  <ul style="padding-left: 2%; margin: 0;">
+    <li style="margin-bottom: 5px;">{{res.responsibility}}</li>
+  </ul>
+</div>
+</div>
+
+
+
+  <div class="Skills" >
+    <h6 style="color: blue; padding-top: 2%;" class="requirement">Skills & Expertise: </h6>
+    <hr>
+    <div *ngFor="let skl of skillList">
+      <ul style="padding-left: 2%; margin: 0;">
+        <li style="margin-bottom: 5px;">{{skl.skill}}</li>
+      </ul>
+    </div>
+    </div>
+
+    <div class="Skills" >
+      <h6 style="color: blue; padding-top: 2%;" class="requirement">Compensation & Other Benefits: </h6>
+      <hr>
+      <div *ngFor="let bnft of benifitList">
+        <ul style="padding-left: 2%; margin: 0;">
+          <li style="margin-bottom: 5px;">{{bnft.benefits}}</li>
+        </ul>
+      </div>
+      </div>
+
+
  
+</div>
+
+<div style="width: 100%; margin-bottom: 20px;  background-color: #ffffff;  padding: 15px;  border-radius: 8px;  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1); 
+   justify-content: space-between;  align-items: center;  margin-top: 30px;">
+  <h6 style="color: blue; padding-top: 2%;" class="requirement">Company Information: </h6>
+  <hr>
+  <p>{{masterListDetails.company}}</p>
+  <div class="address">
+    <h6>Address:</h6>
+    <p>{{masterListDetails.address}}</p>
+  </div>
+ 
+<div class="business">
+  <h6>Business:</h6>
+  <p>{{masterListDetails.business}}</p>
+</div>
+
+</div>
