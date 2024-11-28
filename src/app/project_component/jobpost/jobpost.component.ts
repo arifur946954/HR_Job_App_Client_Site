@@ -195,60 +195,8 @@ sendToList(ev) {
     
   }
 
-  public _getbyIdUrl: string = 'jobpost/getbyid';
-  edit(modelEvnt) {
-      debugger;
-      modelEvnt.event.preventDefault();
-      //var param = { strId: modelEvnt.model.quotationId, strId2: modelEvnt.model.categoryId };
-      var param = { strId: modelEvnt.model.jobOid, strId2: modelEvnt.model.categoryId };
-      var apiUrl = this._getbyIdUrl
-      this._dataservice.getWithMultipleModel(apiUrl, param)
-          .subscribe(response => {
-              this.res = response;
-              console.log("this.Total data ",this.res)
-              if (this.res.resdata.jobPostMaster != '') {
-                var jobPost = JSON.parse(this.res.resdata.jobPostMaster)[0];
-                console.log("this.jobPost",jobPost)
-                debugger;
-                this.jobPostForm.setValue({
-                  jbPostId: jobPost.jbPostId,
-                  jobTitle: jobPost.jobTitle,
-                  company: jobPost.company,
-                  department:jobPost.department,
-                  post: jobPost.post,
-                  startDate: jobPost.startDate == null ? null : this.getNameToNumDate(jobPost.startDate),
-                  //startDate:jobPost.startDate,
-                  //endDate: jobPost.endDate,
-                  endDate: jobPost.endDate == null ? null : this.getNameToNumDate(jobPost.endDate),
-                  education: jobPost.education,
-                  experience: jobPost.experience,
-                  workPlace: jobPost.workPlace,
-                  employeeStatus: jobPost.employeeStatus,
-                  jobLocation: jobPost.jobLocation,
-                  criteria:jobPost.criteria,
-                  address: jobPost.address,
-                  business: jobPost.business,
-                  salaryRange: jobPost.salaryRange,
-                  isActive: jobPost.isActive,
-                  applicantSkill: this.formBuilder.array([]), 
-                  applicantResponsibility: this.formBuilder.array([]),
-                  applicantRequirement: this.formBuilder.array([]),
-                  applicantOtherRequirement: this.formBuilder.array([]),
-                  applicantBenifit: this.formBuilder.array([]),
 
-                });
-                 
-               
-          
-            }
-           
-              this.reset();
-              console.log("this.this.jobPostForm",this.jobPostForm)
-          
-          }, error => {
-              console.log(error);
-          });
-  }
+
 
 
   onCheckboxChange(event: any) {
@@ -262,18 +210,20 @@ sendToList(ev) {
   get applicantSkill(): FormArray {
     return this.jobPostForm.get('applicantSkill') as FormArray;
   }
-  //
+  
   addSkill() {
-    const experienceGroup = this.formBuilder.group({
+    const skillGroup = this.formBuilder.group({
       applicantSkillId: null,
       jobPostId: null,
       skill: [null, Validators.required],
     }); 
   
-    this.applicantSkill.push(experienceGroup);
+    this.applicantSkill.push(skillGroup);
     console.log("this.applicantSkill.",this.applicantSkill)
   }
-  
+
+
+
   
   removeSkill(index: number) {
     this.applicantSkill.removeAt(index);
@@ -372,6 +322,7 @@ sendToList(ev) {
 
   public _saveUrl: string = 'jobpost/saveupdate';
   onSubmit(): void {
+    console.log("this.this.jobPostForm for update",this.jobPostForm)
     debugger
     let formValues = { ...this.jobPostForm.value };
     delete formValues.applicantSkill;
@@ -405,7 +356,7 @@ sendToList(ev) {
         this.resmessage = this.res.resdata.message;
         if (this.res.resdata.resstate) {
           this._msg.success(this.resmessage);
-          //this.reset();
+          this.reset();
         }
       }, error => {
         console.log(error);
@@ -417,7 +368,7 @@ sendToList(ev) {
 
 
   reset() {
-
+debugger
     this.jobPostForm.setValue({
       jbPostId: null,
       jobTitle:null,
@@ -436,15 +387,178 @@ sendToList(ev) {
       business: null,
       salaryRange: null,
       isActive: null,
-      applicantSkill: this.formBuilder.array([]), 
-      applicantResponsibility: this.formBuilder.array([]),
-      applicantRequirement: this.formBuilder.array([]),
-      applicantOtherRequirement: this.formBuilder.array([]),
-      applicantBenifit: this.formBuilder.array([]),
+      //applicantSkill: this.formBuilder.array([]), 
+      applicantSkill: this.applicantSkill.clear(),
+      applicantResponsibility: this.applicantResponsibility.clear(),
+      applicantRequirement: this.applicantRequirement.clear(),
+      applicantOtherRequirement: this.applicantOtherRequirement.clear(),
+      applicantBenifit: this.applicantBenifit.clear(),
+      
 
     })}
 
+//EDIT UPDATE DATA
+public jobSkill:any;
+public _getbyIdUrl: string = 'jobpost/getbyid';
+edit(modelEvnt) {
+    debugger;
+    modelEvnt.event.preventDefault();
+    //var param = { strId: modelEvnt.model.quotationId, strId2: modelEvnt.model.categoryId };
+    var param = { strId: modelEvnt.model.jobOid, strId2: modelEvnt.model.categoryId };
+    var apiUrl = this._getbyIdUrl
+    this._dataservice.getWithMultipleModel(apiUrl, param)
+        .subscribe(response => {
+            this.res = response;
+            console.log("this.Total data ",this.res)
+            var jobSkill = JSON.parse(this.res.resdata.jobSkill);
+            var benefit = JSON.parse(this.res.resdata.jobBenefit);
+            var requirement = JSON.parse(this.res.resdata.jobRequirement);
+            var otherRequirement = JSON.parse(this.res.resdata.jobOtherRequirement);
+            var responsibilityList = JSON.parse(this.res.resdata.jobResponsibility);
+            this.updateSkill(jobSkill);
+            this.updateBenefit(benefit)
+            this.updateRequirement(requirement)
+            this.updateOtherRequirement(otherRequirement)
+            this.updateResponsiboility(responsibilityList)
+            console.log("this.jobSkill ",jobSkill)
+            if (this.res.resdata.jobPostMaster != '') {
+              var jobPost = JSON.parse(this.res.resdata.jobPostMaster)[0];
+            
+              console.log("this.jobPost",jobPost)
+              debugger;
+              this.jobPostForm.setValue({
+                jbPostId: jobPost.jbPostId,
+                jobTitle: jobPost.jobTitle,
+                company: jobPost.company,
+                department:jobPost.department,
+                post: jobPost.post,
+                startDate: jobPost.startDate == null ? null : this.getNameToNumDate(jobPost.startDate),
+                //startDate:jobPost.startDate,
+                //endDate: jobPost.endDate,
+                endDate: jobPost.endDate == null ? null : this.getNameToNumDate(jobPost.endDate),
+                education: jobPost.education,
+                experience: jobPost.experience,
+                workPlace: jobPost.workPlace,
+                employeeStatus: jobPost.employeeStatus,
+                jobLocation: jobPost.jobLocation,
+                criteria:jobPost.criteria,
+                address: jobPost.address,
+                business: jobPost.business,
+                salaryRange: jobPost.salaryRange,
+                isActive: jobPost.isActive === 0? false:true,
+                applicantSkill: this.formBuilder.array([]), 
+                applicantResponsibility: this.formBuilder.array([]),
+                applicantRequirement: this.formBuilder.array([]),
+                applicantOtherRequirement: this.formBuilder.array([]),
+                applicantBenifit: this.formBuilder.array([]),
 
+              });
+              console.log("this.this.jobPostForm",this.jobPostForm)
+          }
+            this.reset();
+           
+        
+        }, error => {
+            console.log(error);
+        });
+
+      
+}
+
+
+// for update Skill
+updateSkill(jobSkill: any[]) {
+this.clearApplicantSkills();
+debugger;
+jobSkill.forEach(skill => {
+   var skillGroup = this.formBuilder.group({
+    applicantSkillId: skill.skillOid,
+    jobPostId: skill.jbPostId,
+    skill: skill.skill,
+  });
+  this.applicantSkill.push(skillGroup);
+});
+}
+clearApplicantSkills() {
+while (this.applicantSkill.length !== 0) {
+  this.applicantSkill.removeAt(0);
+}
+}
+
+//UPDATE BENEFIT
+updateBenefit(benefit: any[]) {
+this.clearApplicantBenefit();
+debugger;
+benefit.forEach(bnft => {
+   var benefitGroup = this.formBuilder.group({
+    applicantBenefitsId: bnft.benefitOid,
+    jobPostId: bnft.jbPostId,
+    benefits: bnft.benefits,
+  });
+  this.applicantBenifit.push(benefitGroup);
+});
+}
+clearApplicantBenefit() {
+while (this.applicantBenifit.length !== 0) {
+  this.applicantBenifit.removeAt(0);
+}
+}
+
+//UPDATE REQUIREMENT
+updateRequirement(requirement: any[]) {
+this.clearApplicantRequirement();
+debugger;
+requirement.forEach(req => {
+   var reqGroup = this.formBuilder.group({
+    applicantRequirementId: req.requirementOid,
+    jobPostId: req.jbPostId,
+    requirement: req.requirement,
+  });
+  this.applicantRequirement.push(reqGroup);
+});
+}
+clearApplicantRequirement() {
+while (this.applicantRequirement.length !== 0) {
+  this.applicantRequirement.removeAt(0);
+}
+}
+
+//UPDATE OTHER REQUIREMENT
+updateOtherRequirement(otherReq: any[]) {
+this.clearApplicantOtherRequirement();
+
+otherReq.forEach(otherReq => {
+   var skillGroup = this.formBuilder.group({
+    applicantOtherRequirementId: otherReq.OtherRequirementOid,
+    jobPostId: otherReq.jbPostId,
+    requirement: otherReq.otherRequirement,
+  });
+  this.applicantOtherRequirement.push(skillGroup);
+});
+}
+clearApplicantOtherRequirement() {
+while (this.applicantOtherRequirement.length !== 0) {
+  this.applicantOtherRequirement.removeAt(0);
+}
+}
+
+//UPDATE RESPONSIBILITY
+updateResponsiboility(responsibility: any[]) {
+this.clearesponsiboility();
+responsibility.forEach(res => {
+   var responsibilityGroup = this.formBuilder.group({
+    applicantResponId: res.responsibilityOid,
+    jobPostId: res.jbPostId,
+    responsibility: res.responsibility,
+  });
+  this.applicantResponsibility.push(responsibilityGroup);
+});
+}
+clearesponsiboility() {
+while (this.applicantResponsibility.length !== 0) {
+  this.applicantResponsibility.removeAt(0);
+}
+}
  
 
 
