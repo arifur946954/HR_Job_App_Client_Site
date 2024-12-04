@@ -108,7 +108,6 @@ export class ClientComponent implements OnInit {
                         itemList.forEach(item => {
                             list.push({ id: item.oId, text: item.typeName });
                         });
-
                         this.clientTypeList = list;
                     }
                 }, error => {

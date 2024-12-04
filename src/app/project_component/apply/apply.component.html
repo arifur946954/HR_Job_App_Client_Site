@@ -442,9 +442,9 @@
                 <div class="col-sm-11 p-0 m-0" style="float: left;">
                     <div style="padding: 0px; width: 90.5%; margin-left: 10%; font-size: 13px; float: left;">
                     
-                      <ng-select2  formControlName="preAddDivision" [options]="options"
-                      [allowClear]="true" id="preAddDivision" name="preAddDivision"
-                      [placeholder]="'Select Division'" >
+                      <ng-select2  formControlName="preAddDivision" [options]="options"  
+                      [allowClear]="true" id="preAddDivision" name="preAddDivision" [data]="preDivList"
+                      [placeholder]="'Select Division'" (valueChanged)="getDistrictById($event)">
                      </ng-select2>
                     </div>
                 </div>
@@ -453,13 +453,13 @@
 
           <div class=" col-xl-2 col-lg-2 col-md-12 col-sm-6 col-xs-12 m-0 p-0" style="float: left;">
             <div class="form-group clearfix">
-              <label style="margin-left: 10%;" for="preAddDivision" class="control-label">District:</label>
+              <label style="margin-left: 10%;" for="preAddDistrict" class="control-label">District:</label>
               <div class="col-sm-11 p-0 m-0" style="float: left;">
                   <div style="padding: 0px; width: 90.5%; margin-left: 10%; font-size: 13px; float: left;">
                   
-                    <ng-select2  formControlName="preAddDivision" [options]="options"
-                    [allowClear]="true" id="preAddDivision" name="preAddDivision"
-                    [placeholder]="'Select Division'" >
+                    <ng-select2  formControlName="preAddDistrict" [options]="options"
+                    [allowClear]="true" id="preAddDistrict" name="preAddDistrict" [data]="preDisList"
+                    [placeholder]="'Select Division'" (valueChanged)="getThanaById($event)">
                    </ng-select2>
                   </div>
               </div>
@@ -468,12 +468,11 @@
 
         <div class=" col-xl-2 col-lg-2 col-md-12 col-sm-6 col-xs-12 m-0 p-0" style="float: left;">
           <div class="form-group clearfix">
-            <label style="margin-left: 10%;" for="preAddDivision" class="control-label">Thana:</label>
+            <label style="margin-left: 10%;" for="preAddThana" class="control-label">Thana:</label>
             <div class="col-sm-11 p-0 m-0" style="float: left;">
                 <div style="padding: 0px; width: 90.5%; margin-left: 10%; font-size: 13px; float: left;">
-                
-                  <ng-select2  formControlName="preAddDivision" [options]="options"
-                  [allowClear]="true" id="preAddDivision" name="preAddDivision"
+                  <ng-select2  formControlName="preAddThana" [options]="options" [data]="preThnList"
+                  [allowClear]="true" id="preAddThana" name="preAddThana"
                   [placeholder]="'Select Division'" >
                  </ng-select2>
                 </div>

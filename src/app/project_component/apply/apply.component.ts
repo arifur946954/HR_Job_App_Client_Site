@@ -19,6 +19,7 @@ import { pathValidation } from 'src/app/api/api.pathvlidation.service';
 import { DataService } from 'src/app/api/api.dataservice.service';
 import { PagerService } from 'src/app/api/api.pager.service';
 import { Conversion } from 'src/app/api/api.conversion.service';
+import { it } from 'date-fns/locale';
 
 declare var $: any;
 
@@ -70,6 +71,12 @@ export class ApplyComponent implements OnInit {
   cv: FileList | null = null;
   selectedFiles:FileList | null = null;
   binaryString:any
+  public preDivList: any = [];
+  public parDivList: any = [];
+  public preDisList: any = [];
+  public parDisList: any = [];
+  public preThnList: any = [];
+  public parThnList: any = [];
 
 
 
@@ -104,6 +111,7 @@ export class ApplyComponent implements OnInit {
     this.getList();
     this.createForm();
     this.addInitialAcademicQualifications();
+    this.getAllDivision();
     //this.getListByPage(this.pageSize);
   }
   cmnbtnAction(evmodel) {
@@ -124,6 +132,77 @@ setToggling(divName) {
 
 
 }
+
+//GET DIVISION NAME
+public _divUrl: string = 'jobdropdown/getalldivision';
+getAllDivision() {
+    var list: Array<{ id, text }> = [{ id: 0, text: "Please Select" }];
+    var apiUrl = this._divUrl;
+    this._dataservice.getall(apiUrl)
+        .subscribe(
+            response => {
+                this.res = response;
+                if (this.res.resdata.listAllDiv.length > 0) {
+                    var itemList = this.res.resdata.listAllDiv;
+                    itemList.forEach(item => {
+                        list.push({ id: item.oId, text: item.divName });
+                    });
+                    this.preDivList = list;
+                    console.log(" this.divisonList", this.preDivList)
+                }
+            }, error => {
+                console.log(error);
+            });
+}
+//GET DISTRICT NAME
+public _getbyDivIdUrl: string = 'reqform/getdistrictbyid';
+getDistrictById(divId:string) {
+  console.log("divId","Length",divId,divId.length)
+  var list: Array<{ id, text }> = [{ id: 0, text: "Please Select" }];
+    debugger;
+    var param = { id: divId };
+    var apiUrl = this._getbyDivIdUrl
+    this._dataservice.getWithMultipleModel(apiUrl, param)
+        .subscribe(response => {
+            this.res = JSON.parse(response.resdata.districtList) ;
+           
+            var dis= this.res;
+            dis.forEach(item=>{
+              list.push({id:item.districtOid,text:item.districtName})
+            })
+            this.preDisList=list;
+            console.log(" this.preDisList", this.preDisList)
+
+       
+        }, error => {
+            console.log(error);
+        });
+}
+
+//GET THANA NAME
+public _getbyThnIdUrl: string = 'reqform/getthanabyid';
+getThanaById(divId:string) {
+  var list: Array<{ id, text }> = [{ id: 0, text: "Please Select" }];
+    debugger;
+    var param = { id: divId };
+    var apiUrl = this._getbyThnIdUrl
+    this._dataservice.getWithMultipleModel(apiUrl, param)
+        .subscribe(response => {
+          console.log(" this.Thanaaaaaaa", response)
+            this.res = JSON.parse(response.resdata.thanaList) ;
+            var thana= this.res;
+            thana.forEach(item=>{
+              list.push({id:item.upzlOid,text:item.upzlName})
+            })
+            this.preThnList=list;
+            console.log(" this.Thanaaaaaaa", this.preThnList)
+
+       
+        }, error => {
+            console.log(error);
+        });
+}
+//SAME AS PRESENT ADDRESS
 
 
 createForm() {
@@ -358,9 +437,6 @@ getList() {
             this.res = response;
             this.jobPostList = JSON.parse(this.res.resdata.listJobPost);
             console.log("this.Total data LLLLLLLLLLLLLLLLLLLLLLLLLLL ", this.jobPostList)
-        
-         
-          
             console.log("this.this.jobPostForm",this.requirementForm)
         
         }, error => {
