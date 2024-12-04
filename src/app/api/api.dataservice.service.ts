@@ -218,10 +218,25 @@ export class DataService {
      uploadFile(fileCollection: FileList): Observable<any> {
           const formData = new FormData();
           for (let i = 0; i < fileCollection.length; i++) {
-            formData.append('fileCollection', fileCollection[i], fileCollection[i].name);
+          formData.append('fileCollection', fileCollection[i], fileCollection[i].name);
           }
           return this._http.post<any>(`${this.apiHost}reqform/dbsinleuploadfile`, formData);
         }
+
+          //start share data
+          private storageKey = 'masterListId';
+          setMasterListId(id: string) {
+          localStorage.setItem(this.storageKey, id);
+          }
+          getMasterListId(): string {
+          return localStorage.getItem(this.storageKey);
+          }
+          clearMasterListId() {
+          localStorage.removeItem(this.storageKey);
+          }
+
+
+
 
 }
 

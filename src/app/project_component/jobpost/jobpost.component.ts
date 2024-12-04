@@ -102,49 +102,6 @@ setToggling(divName) {
 
 
 
-// public jobPostList: any = [];
-// public jobPostLists: any = [];
-// public _listByPageUrl: string = 'jobpost/getbypages';
-// getListByPage(pageSize) {
-
-//   this.getListByPages(1, true, pageSize, '');
-
-// }
-// getListByPages(pageIndex: number, isPaging: boolean, pageSize, searchVal: string) {
-       
-
-//   this.pageSize=parseInt(pageSize);
-//   var param = {
-//       pageNumber: pageIndex
-//       , pageSize: this.pageSize
-//       , isPaging: isPaging
-//       , searchVal: searchVal
-//       , loggedUserId: this.loggedUserId
-      
-//   };
-//   this._dataservice.getWithMultipleModel_Sync(this._listByPageUrl, param)
-//       .then(
-//           response => {
-//             this.res = response;
-//             console.log("   this.response", this.res)
-//               this.itemListByPage = JSON.parse(this.res.resdata.listJobPost);
-//               this.jobPostList=this.itemListByPage;
-          
-//               console.log("   this.response", this.jobPostList)
-//               if (this.jobPostList.length > 0) {
-//                 this.jobPostList.forEach((item, index) => {
-//                     item.isActive = item.isActive == '1' ? true : false;
-//                 });
-    
-//                 this.jobPostLists = this.jobPostList;
-           
-//             }
-        
-//           }, error => {
-//               console.log(error);
-//           }
-//       );
-// }
 
 public responseTag: string = 'listJobPost';
 public jobPostLists: any = [];

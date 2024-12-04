@@ -50,7 +50,7 @@ body {
 .containers{
   border: 2px solid gray; 
   /* background: linear-gradient(to top,#aeaef0 50%,  #aeaef0 90%) no-repeat; */
-  background: #B8DAFF;
+  background: white;
   border-radius: 10px;
   padding-left: 10px;
   padding-right: 10px;
@@ -341,7 +341,6 @@ width: 100px;
     padding-bottom: 5px;
     padding-left: 5px;
     border-radius: 2%;
-    width: 200%;
 
     
   }
@@ -423,11 +422,11 @@ width: 100px;
 
 
 .form-group {
-  //margin-bottom: 15px; /* Adjust the spacing as needed */
+  margin-bottom: 15px; /* Adjust the spacing as needed */
 }
 
 .academic-qualification-item {
-  //margin-bottom: 30px; /* Creates gap between qualifications */
+  margin-bottom: 30px; /* Creates gap between qualifications */
 }
 
 
@@ -491,41 +490,3 @@ width: 100px;
   cursor: pointer;
 }
 
-
-
-@media (max-width: 767px) { 
-.preandparAddress {
-   width:  100%;
-   margin-left: 12%;
-  }
-}
-
-@media (min-width: 768px) { 
-  .preandparAddress {
-     width:  10%;
-    }
-  }
-
-  @media (max-width: 767px) { 
-    .accInput {
-      width: 200%; /* Full width for small devices */
-    }
-  }
-  
-  @media (min-width: 768px) { 
-    .accInput {
-      width: 80%; /* 80% width for large devices */
-    }
-  }
-
-  @media (max-width: 767px) { 
-    .workexperienceDetails {
-      //width: 200%; /* Full width for small devices */
-    }
-  }
-  
-  @media (min-width: 768px) { 
-   .workexperienceDetails {
-     margin-left: 150px; /* 80% width for large devices */
-    }
-  }

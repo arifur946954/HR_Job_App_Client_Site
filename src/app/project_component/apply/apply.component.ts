@@ -31,7 +31,7 @@ declare var $: any;
 })
 
 export class ApplyComponent implements OnInit {
-    @ViewChild('cmnsrv', { static: false }) _msg: CommonService;
+  @ViewChild('cmnsrv', { static: false }) _msg: CommonService;
   @ViewChild('cmnpager', { static: false }) _pg: CommonPager;
   @ViewChild(ReportViewer) _rptViewer: ReportViewer;
   public settings: Settings;
@@ -42,11 +42,11 @@ export class ApplyComponent implements OnInit {
   public isToggleMaster: boolean = true;
   public res: any;
   public resmessage: string;
-  public jobPostForm: FormGroup;
+  public requirementForm: FormGroup;
   public pageSize: number = 10;
   public listJobPost: any;
   public itemListByPage: any = [];
-  public  jobPostList:any;
+  public jobPostList:any;
   public skillList:any;
   public benifitList:any;
   public requirementList:any;
@@ -56,6 +56,21 @@ export class ApplyComponent implements OnInit {
   public masterDiv:boolean=true;
   public detailDiv:boolean=false;
   public applyForm:boolean=false
+  bloodGroupList:string[]=['A+','B+','O+',"AB+",'A-','B-','O-',"AB-"];
+  qualificationType: string[] = ['JSC', 'SSC', 'HSC', 'BSC', 'MSC', 'PhD']; 
+  WorkOrderStatus: Array<{ value: string, label: string }> = [
+    { value: '1', label: 'Work Order InComing' },
+    { value: '0', label: 'Work Order  OutGoing' },
+  ];
+  genderList:string[]=['Male','Female','Other'];
+  maritialStatusList:string[]=['Married','Unmarried'];
+  religionList: string[] = ['Islam', 'Hindu', 'Christianity', 'Buddhism', 'Other'];
+  image: FileList | null = null;
+  signature: FileList | null = null;
+  cv: FileList | null = null;
+  selectedFiles:FileList | null = null;
+  binaryString:any
+
 
 
   constructor(public appSettings:AppSettings, 
@@ -87,10 +102,9 @@ export class ApplyComponent implements OnInit {
 }
   ngOnInit(){
     this.getList();
-   // this.createForm();
+    this.createForm();
+    this.addInitialAcademicQualifications();
     //this.getListByPage(this.pageSize);
-
-  
   }
   cmnbtnAction(evmodel) {
     debugger
@@ -112,8 +126,222 @@ setToggling(divName) {
 }
 
 
+createForm() {
+  this.requirementForm = this.formBuilder.group({
+    applicantId: null,
+    jobTitle: new FormControl(null, Validators.required),
+    company: new FormControl(null, Validators.required),
+    department: new FormControl(null, Validators.required),
+    appliedPost: new FormControl(null, Validators.required),
+    mobileNumber: new FormControl(null, Validators.required),
+    //campaign: new FormControl(null, Validators.required),
+    name: new FormControl(null, Validators.required),
+    fatherName: new FormControl(null, Validators.required),
+    motherName: new FormControl(null, Validators.required),
+    nid: new FormControl(null, Validators.required),
+    dateOfBirth: new FormControl(null, Validators.required),
+    birthPlace: new FormControl(null, Validators.required),
+    relegion: new FormControl(null, Validators.required),
+    bloodGroup: new FormControl(null, Validators.required),
+    gender: new FormControl(null, Validators.required),
+    maritialStatus: new FormControl(null, Validators.required),
+    spouseName: new FormControl(null, Validators.required),
+    email: new FormControl(null, Validators.required),
+  
+    isActive: new FormControl(null, Validators.required),
+    preAddDivision: new FormControl(null, Validators.required),
+    preAddDistrict: new FormControl(null, Validators.required),
+    preAddThana: new FormControl(null, Validators.required),
+    preAddPostOffice: new FormControl(null, Validators.required),
+    preAddVillage: new FormControl(null, Validators.required),
+    parAddDivision: new FormControl(null, Validators.required),
+    parAddDistrict: new FormControl(null, Validators.required),
+    parAddThana: new FormControl(null, Validators.required),
+    parAddPostOffice: new FormControl(null, Validators.required),
+    parAddVillage: new FormControl(null, Validators.required),
+    expectedSelery: new FormControl(null, Validators.required),
+    appliedBy: new FormControl(null, Validators.required),
+   
+   
+    companyDeptPost: new FormControl(null, Validators.required),
+    companyDeptPostOpnDate: new FormControl(null, Validators.required),
+    companyDeptPostActvStatus: new FormControl(null, Validators.required),
+    imagePath: new FormControl(null, Validators.required),
+    signaturePath: new FormControl(null, Validators.required),
+    cvPath: new FormControl(null, Validators.required),
+    academicQualifications: this.formBuilder.array([]),
+    workExperiences: this.formBuilder.array([]), 
+
+    
+  });
+  
+}
+
+async onSubmit(): Promise<void> {
+  try {
+    await this.uploadImages();
+    await this.uploadSignature();
+    await this.uploadCV();
+    this.onSubmitFileForm();
+  } catch (error) {
+    console.error("File upload sequence failed.", error);
+  }
+}
 
 
+onFileChange(event: any): void {
+  this.image = event.target.files;  
+}
+
+OnSignatureChange(event: any): void {
+  this.signature = event.target.files;  
+}
+
+OnCvChange(event: any): void {
+  this.cv = event.target.files;  
+}
+
+// Upload image with async/await
+async uploadImages(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    this._dataservice.uploadFile(this.image).subscribe(
+      response => {
+        this.requirementForm.controls.imagePath.setValue(response.data[0]);
+        resolve(); 
+      },
+      error => {
+        console.error(error);
+        alert('Image upload failed. Please try again.');
+        reject(error); 
+      }
+    );
+  });
+}
+
+// Upload signature with async/await
+async uploadSignature(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    this._dataservice.uploadFile(this.signature).subscribe(
+      response => {
+        this.requirementForm.controls.signaturePath.setValue(response.data[0]);
+        resolve(); 
+      },
+      error => {
+        console.error(error);
+        alert('Signature upload failed. Please try again.');
+        reject(error); 
+      }
+    );
+  });
+}
+
+// Upload CV with async/await
+async uploadCV(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    this._dataservice.uploadFile(this.cv).subscribe(
+      response => {
+        this.requirementForm.controls.cvPath.setValue(response.data[0]);
+        resolve(); 
+      },
+      error => {
+        console.error(error);
+        alert('CV upload failed. Please try again.');
+        reject(error); 
+      }
+    );
+  });
+}
+
+public _saveUrl: string = 'reqform/saveupdate11';
+onSubmitFileForm(): void {
+  let formValues = { ...this.requirementForm.value };
+  delete formValues.academicQualifications;
+  delete formValues.workExperiences;
+  console.log("formValues",formValues)
+  const reqform = formValues;
+  const acaQlf = this.academicQualifications.value;
+  const wrkExp = this.workExperiences.value;
+  
+  const param = { 
+    loggedUserId: this.userID,
+    strId: this.requirementForm.controls.applicantId.value, 
+    strId2: this.userID 
+  };
+  
+  const ModelsArray = [param, [reqform], acaQlf, wrkExp];
+  this._dataservice.postMultipleModel(this._saveUrl, ModelsArray)
+    .subscribe(response => {
+      this.res = response;
+      this.resmessage = this.res.resdata.message;
+      if (this.res.resdata.resstate) {
+        this._msg.success(this.resmessage);
+        //this.reset();
+      }
+    }, error => {
+      console.log(error);
+    });
+}
+
+
+get academicQualifications(): FormArray {
+  return this.requirementForm.get('academicQualifications') as FormArray;
+}
+
+// Add initial academic qualifications
+addInitialAcademicQualifications() {
+  for (let i = 0; i < 3; i++) {
+    this.addAcademicQualification();
+  }
+}
+
+// Add a new academic qualification FormGroup to the FormArray
+addAcademicQualification() {
+  const qualificationGroup = this.formBuilder.group({
+    acQlfId: null,
+    applicantId: null,
+    degree: ['', Validators.required],
+    board: ['', Validators.required],
+    institution: ['', Validators.required],
+    major: ['', Validators.required],
+    result: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+    passingyear: ['', [Validators.required, Validators.pattern("^[0-9]{4}$")]]
+  });
+
+  this.academicQualifications.push(qualificationGroup);
+}
+
+// Remove an academic qualification from the FormArray
+removeAcademicQualification(index: number) {
+  if (this.academicQualifications.length > 3) { // Ensure at least 3 qualifications remain
+    this.academicQualifications.removeAt(index);
+  }
+}
+
+
+get workExperiences(): FormArray {
+  return this.requirementForm.get('workExperiences') as FormArray;
+}
+
+// Add new work experience form group
+addExperience() {
+  const experienceGroup = this.formBuilder.group({
+    expId: null,
+    applicantId: null,
+    post: [null, Validators.required],
+    organization: [null, Validators.required],
+    jobLocation: [null, Validators.required],
+    salary: [null, [Validators.required, Validators.pattern("^[0-9]*$")]],
+    reportingTo: [null, Validators.required],
+    defaultProduct: [null, Validators.required],
+  });
+
+  this.workExperiences.push(experienceGroup);
+}
+
+// Remove work experience by index
+removeExperience(index: number) {
+  this.workExperiences.removeAt(index);
+}
 
 
 
@@ -133,7 +361,7 @@ getList() {
         
          
           
-            console.log("this.this.jobPostForm",this.jobPostForm)
+            console.log("this.this.jobPostForm",this.requirementForm)
         
         }, error => {
             console.log(error);
@@ -147,36 +375,7 @@ getList() {
 
 
 
-  createForm() {
-    this.jobPostForm = this.formBuilder.group({
-      jbPostId: null,
-      jobTitle: new FormControl(null, Validators.required),
-      company: new FormControl(null, Validators.required),
-      department: new FormControl(null, Validators.required),
-      post: new FormControl(null, Validators.required),
-      startDate: new FormControl(null, Validators.required),
-      endDate: new FormControl(null, Validators.required),
-    
-      education: new FormControl(null, Validators.required),
-      experience: new FormControl(null, Validators.required),
-      workPlace: new FormControl(null, Validators.required),
-      employeeStatus: new FormControl(null, Validators.required),
-      jobLocation: new FormControl(null, Validators.required),
-      criteria: new FormControl(null, Validators.required),
-      address: new FormControl(null, Validators.required),
-      business: new FormControl(null, Validators.required),
-      salaryRange: new FormControl(null, Validators.required),
-      isActive: true,
-      applicantSkill: this.formBuilder.array([]), 
-      applicantResponsibility: this.formBuilder.array([]),
-      applicantRequirement: this.formBuilder.array([]),
-      applicantOtherRequirement: this.formBuilder.array([]),
-      applicantBenifit: this.formBuilder.array([]),
-      
 
-    });
-    
-  }
 public masterListDetails:any;
   public _getbyIdUrl: string = 'jobpost/getbyid';
   showDetails(modelEvnt) {
@@ -207,7 +406,7 @@ public masterListDetails:any;
         
            
 
-              console.log("this.this.jobPostForm",this.jobPostForm)
+              console.log("this.this.jobPostForm",this.requirementForm)
           
           }, error => {
               console.log(error);
@@ -222,8 +421,34 @@ showHtml(){
 }
  
 
+ApplyForm(){
+  debugger
+  this.masterDiv=false;
+  this.detailDiv=false;
+  this.applyForm=true;
+  console.log(" this.applyForm", this.applyForm)
+}
+
+//for share data 
+onApplyNow(mstrId:string) {
+  this._dataservice.setMasterListId(mstrId);
+}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
 

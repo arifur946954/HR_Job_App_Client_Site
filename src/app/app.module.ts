@@ -64,34 +64,9 @@ import { HomeComponent } from './project_component/home/home.component';
 import { NgxDocViewerModule } from  'ngx-doc-viewer';
 import { DashboardComponent } from './project_component/dashboard/dashboard.component';
 
-
-
-
-
-
 import { ClientTypeComponent } from './project_component/businessSetup/clientType/clienttype.component';
 import { ClientComponent } from './project_component/businessSetup/client/client.component';
 import { WorkOrderComponent } from './project_component/businessSetup/workorder/workorder.component';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { DatePipe } from '@angular/common';
 import {UtilService} from '../app/util/util.service'
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -118,6 +93,7 @@ import { ChartsModule } from 'ng2-charts';
 import { UserSetupComponent } from './project_component/security/userSetup/userSetup.component';
 import { JobPostComponent } from './project_component/jobpost/jobpost.component';
 import { ApplyComponent } from './project_component/apply/apply.component';
+import { ApplicantFormsComponent } from './project_component/applicantforms/applicantforms.component';
 //import { ApplicantFormsComponent } from './project_component/applicant/applicant/applicantforms.component';
 
 //import { HomesComponent } from './pages/homes/homes.component';
@@ -209,6 +185,7 @@ import { ApplyComponent } from './project_component/apply/apply.component';
     ,WorkOrderComponent
     ,JobPostComponent
     ,ApplyComponent
+    ,ApplicantFormsComponent
 
 
    

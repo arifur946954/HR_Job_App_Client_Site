@@ -18,6 +18,7 @@ import { ClientComponent } from './project_component/businessSetup/client/client
 import { WorkOrderComponent } from './project_component/businessSetup/workorder/workorder.component';
 import { JobPostComponent } from './project_component/jobpost/jobpost.component';
 import { ApplyComponent } from './project_component/apply/apply.component';
+import { ApplicantFormsComponent } from './project_component/applicantforms/applicantforms.component';
 
 
 
@@ -75,7 +76,8 @@ export const routes: Routes = [
            { path: 'businessSetup/client', component: ClientComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['/businessSetup/client']} },//, RoleGuard
            { path: 'businessSetup/workorder', component: WorkOrderComponent, canActivate: [AuthGuard], data: {roles: ['/businessSetup/workorders']} },
            { path: 'jobPost', component: JobPostComponent, canActivate: [AuthGuard], data: {roles: ['/jobPost']} },
-           { path: 'apply', component: ApplyComponent, canActivate: [AuthGuard], data: {roles: ['/apply']} }
+           { path: 'apply', component: ApplyComponent, canActivate: [AuthGuard], data: {roles: ['/apply']} },
+           { path: 'applicantforms', component: ApplicantFormsComponent, canActivate: [AuthGuard], data: {roles: ['/applicantforms']} }
            //{ path: 'businessSetup/workorder', component: WorkOrderComponent, canActivate: [AuthGuard, RoleGuard], data: {roles: ['/businessSetup/workorder']} },//, RoleGuard
           
           
